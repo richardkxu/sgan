@@ -36,12 +36,12 @@ def seq_collate(data):
     return tuple(out)
 
 
-def read_file(_path, delim='\t'):
+def read_file(_path, delim='space'):
     data = []
     if delim == 'tab':
         delim = '\t'
     elif delim == 'space':
-        delim = ' '
+        delim = None
     with open(_path, 'r') as f:
         for line in f:
             line = line.strip().split(delim)
@@ -72,7 +72,7 @@ class TrajectoryDataset(Dataset):
     """Dataloder for the Trajectory datasets"""
     def __init__(
         self, data_dir, obs_len=8, pred_len=12, skip=1, threshold=0.002,
-        min_ped=1, delim='\t'
+        min_ped=1, delim='space'
     ):
         """
         Args:
